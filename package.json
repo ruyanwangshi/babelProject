@@ -16,7 +16,7 @@
     "core-js": "^3.26.1"
   },
   "scripts": {
-    "build": "npx babel src --out-dir dist",
+    "build": "npx babel src/class.js --out-dir dist",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
