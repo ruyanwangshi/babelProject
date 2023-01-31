@@ -104,7 +104,6 @@ Promise.resolve(1).then((res) => {
 
 > 转换成
 
-
 ```js
 'use strict'
 
@@ -115,7 +114,8 @@ Promise.resolve(1).then(function (res) {
   console.log(res)
 })
 ```
-> 仅仅只是添加使用到的垫片，具体配置改为如下，建议使用core-js@3,因为core-js@2 内容不再更新；
+
+> 仅仅只是添加使用到的垫片，具体配置改为如下，建议使用 core-js@3,因为 core-js@2 内容不再更新；
 
 ```json
 {
@@ -132,121 +132,158 @@ Promise.resolve(1).then(function (res) {
 ```
 
 > 对应编译出来代码
-```js
-"use strict";
 
-require("core-js/modules/es.object.to-string.js");
-require("core-js/modules/es.promise.js");
-var obj = {};
-var test = function test() {};
-var res = obj === null || obj === void 0 ? void 0 : obj.type;
+```js
+'use strict'
+
+require('core-js/modules/es.object.to-string.js')
+require('core-js/modules/es.promise.js')
+var obj = {}
+var test = function test() {}
+var res = obj === null || obj === void 0 ? void 0 : obj.type
 Promise.resolve(1).then(function (res) {
-  console.log(res);
-});
+  console.log(res)
+})
 ```
 
 ### @babel/plugin-transform-runtime
+
 > @babel/plugin-transform-runtime 是一个可以重复使用 Babel 注入的帮助程序，以节省代码大小的插件。 此插件为开发时使用，但运行时需要 @babel/runtime 插件进行结合使用。
 
-> Babel 会使用很小的辅助函数实现 类似 _createClass 公共方法。这个方法 会被注入到每个使用到它的文件中，如果有很多文件中使用class，那么这个方法也会被注入很多次。
+> Babel 会使用很小的辅助函数实现 类似 \_createClass 公共方法。这个方法 会被注入到每个使用到它的文件中，如果有很多文件中使用 class，那么这个方法也会被注入很多次。
 
 > 例如：
 
 ```js
-class Bar{
-    constructor() {
-
-    }
-    get_value() {
-        return '测试内容'
-    }
+class Bar {
+  constructor() {}
+  get_value() {
+    return '测试内容'
+  }
 }
 ```
+
 > 被转换成
 
 ```js
-"use strict";
+'use strict'
 
-require("core-js/modules/es.object.define-property.js");
-require("core-js/modules/es.symbol.iterator.js");
-require("core-js/modules/es.array.iterator.js");
-require("core-js/modules/es.string.iterator.js");
-require("core-js/modules/web.dom-collections.iterator.js");
-require("core-js/modules/es.symbol.to-primitive.js");
-require("core-js/modules/es.date.to-primitive.js");
-require("core-js/modules/es.symbol.js");
-require("core-js/modules/es.symbol.description.js");
-require("core-js/modules/es.object.to-string.js");
-require("core-js/modules/es.number.constructor.js");
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor); } }
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); Object.defineProperty(Constructor, "prototype", { writable: false }); return Constructor; }
-function _toPropertyKey(arg) { var key = _toPrimitive(arg, "string"); return _typeof(key) === "symbol" ? key : String(key); }
-function _toPrimitive(input, hint) { if (_typeof(input) !== "object" || input === null) return input; var prim = input[Symbol.toPrimitive]; if (prim !== undefined) { var res = prim.call(input, hint || "default"); if (_typeof(res) !== "object") return res; throw new TypeError("@@toPrimitive must return a primitive value."); } return (hint === "string" ? String : Number)(input); }
-var Bar = /*#__PURE__*/function () {
-  function Bar() {
-    _classCallCheck(this, Bar);
+require('core-js/modules/es.object.define-property.js')
+require('core-js/modules/es.symbol.iterator.js')
+require('core-js/modules/es.array.iterator.js')
+require('core-js/modules/es.string.iterator.js')
+require('core-js/modules/web.dom-collections.iterator.js')
+require('core-js/modules/es.symbol.to-primitive.js')
+require('core-js/modules/es.date.to-primitive.js')
+require('core-js/modules/es.symbol.js')
+require('core-js/modules/es.symbol.description.js')
+require('core-js/modules/es.object.to-string.js')
+require('core-js/modules/es.number.constructor.js')
+function _typeof(obj) {
+  '@babel/helpers - typeof'
+  return (
+    (_typeof =
+      'function' == typeof Symbol && 'symbol' == typeof Symbol.iterator
+        ? function (obj) {
+            return typeof obj
+          }
+        : function (obj) {
+            return obj && 'function' == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? 'symbol' : typeof obj
+          }),
+    _typeof(obj)
+  )
+}
+function _classCallCheck(instance, Constructor) {
+  if (!(instance instanceof Constructor)) {
+    throw new TypeError('Cannot call a class as a function')
   }
-  _createClass(Bar, [{
-    key: "get_value",
-    value: function get_value() {
-      return '测试内容';
-    }
-  }]);
-  return Bar;
-}();
+}
+function _defineProperties(target, props) {
+  for (var i = 0; i < props.length; i++) {
+    var descriptor = props[i]
+    descriptor.enumerable = descriptor.enumerable || false
+    descriptor.configurable = true
+    if ('value' in descriptor) descriptor.writable = true
+    Object.defineProperty(target, _toPropertyKey(descriptor.key), descriptor)
+  }
+}
+function _createClass(Constructor, protoProps, staticProps) {
+  if (protoProps) _defineProperties(Constructor.prototype, protoProps)
+  if (staticProps) _defineProperties(Constructor, staticProps)
+  Object.defineProperty(Constructor, 'prototype', { writable: false })
+  return Constructor
+}
+function _toPropertyKey(arg) {
+  var key = _toPrimitive(arg, 'string')
+  return _typeof(key) === 'symbol' ? key : String(key)
+}
+function _toPrimitive(input, hint) {
+  if (_typeof(input) !== 'object' || input === null) return input
+  var prim = input[Symbol.toPrimitive]
+  if (prim !== undefined) {
+    var res = prim.call(input, hint || 'default')
+    if (_typeof(res) !== 'object') return res
+    throw new TypeError('@@toPrimitive must return a primitive value.')
+  }
+  return (hint === 'string' ? String : Number)(input)
+}
+var Bar = /*#__PURE__*/ (function () {
+  function Bar() {
+    _classCallCheck(this, Bar)
+  }
+  _createClass(Bar, [
+    {
+      key: 'get_value',
+      value: function get_value() {
+        return '测试内容'
+      },
+    },
+  ])
+  return Bar
+})()
 ```
->  具体配置为：
+
+> 具体配置为：
 
 ```json
 {
-    "presets": [
-        [
-            "@babel/preset-env",
-            {
-                "useBuiltIns": "usage",
-                "corejs": 3
-            }
-        ]
-    ],
-    "plugins": [
-        [
-            "@babel/plugin-transform-runtime"
-        ]
-    ]
+  "presets": [
+    [
+      "@babel/preset-env",
+      {
+        "useBuiltIns": "usage",
+        "corejs": 3
+      }
+    ]
+  ],
+  "plugins": [["@babel/plugin-transform-runtime"]]
 }
-
 ```
+
 请执行 npm run build
 
-
-> <strong>但是此方式还是有缺点的，比如说Promise,是引入的实现垫片包会污染到全局的使用，如果不想使垫片污染到全局，请使用如下配置</strong>
+> <strong>但是此方式还是有缺点的，比如说 Promise,是引入的实现垫片包会污染到全局的使用，如果不想使垫片污染到全局，请使用如下配置</strong>
 
 ```json
 {
-    "presets": [
-        [
-            "@babel/preset-env"
-        ]
-    ],
-    "plugins": [
-      [
-        "@babel/plugin-transform-runtime",
-        {
-          "corejs": 3
-        }
-      ]
+  "presets": [["@babel/preset-env"]],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
+      {
+        "corejs": 3
+      }
     ]
+  ]
 }
-
 ```
+
 请执行 npm run build
 
 > 为什么要这么细致去配置呢，直接使用 @babel/preset-env 配置响应配置就好了，它们之间的区别又是什么？
 
-| .babelrc 配置 | webpack打包后的产物大小 |
-| ---- | ---- |
-| 不使用 @babel/plugin-transform-runtime | 36KB |
-| 使用@babel/plugin-transform-runtime，并配置参数 corejs: 3。不会污染全局环境 | 37KB |
-| 使用@babel/plugin-transform-runtime，不配置 corejs | 22KB |
+| .babelrc 配置                                                               | webpack 打包后的产物大小 |
+| --------------------------------------------------------------------------- | ------------------------ |
+| 不使用 @babel/plugin-transform-runtime                                      | 36KB                     |
+| 使用@babel/plugin-transform-runtime，并配置参数 corejs: 3。不会污染全局环境 | 37KB                     |
+| 使用@babel/plugin-transform-runtime，不配置 corejs                          | 22KB                     |
