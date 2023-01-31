@@ -2,20 +2,20 @@
   "presets": [
     [
       "@babel/preset-env",
+      // {
+      //   "useBuiltIns": "usage",
+      //   "corejs": 3
+      // }
+    ]
+  ],
+  "plugins": [
+    [
+      "@babel/plugin-transform-runtime",
       {
-        "useBuiltIns": "usage",
         "corejs": 3
       }
     ]
-  ],
-  // "plugins": [
-  //   [
-  //     "@babel/plugin-transform-runtime",
-  //     {
-  //       "corejs": 3
-  //     }
-  //   ]
-  // ]
+  ]
   // "targets": "defaults"
   // "targets": "> 0.25%, not dead"
   // "targets": "ie8"

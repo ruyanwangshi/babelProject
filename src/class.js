@@ -1,10 +1,10 @@
 
 
 class Bar{
-    constructor() {
+    // constructor() {
 
-    }
-    get_value() {
-        return '测试内容'
-    }
+    // }
+    // get_value() {
+    //     return '测试内容'
+    // }
 }

@@ -146,6 +146,7 @@ Promise.resolve(1).then(function (res) {
 ```
 
 ### @babel/plugin-transform-runtime
+> @babel/plugin-transform-runtime 是一个可以重复使用 Babel 注入的帮助程序，以节省代码大小的插件。 此插件为开发时使用，但运行时需要 @babel/runtime 插件进行结合使用。
 
 > Babel 会使用很小的辅助函数实现 类似 _createClass 公共方法。这个方法 会被注入到每个使用到它的文件中，如果有很多文件中使用class，那么这个方法也会被注入很多次。
 
@@ -196,3 +197,56 @@ var Bar = /*#__PURE__*/function () {
   return Bar;
 }();
 ```
+>  具体配置为：
+
+```json
+{
+    "presets": [
+        [
+            "@babel/preset-env",
+            {
+                "useBuiltIns": "usage",
+                "corejs": 3
+            }
+        ]
+    ],
+    "plugins": [
+        [
+            "@babel/plugin-transform-runtime"
+        ]
+    ]
+}
+
+```
+请执行 npm run build
+
+
+> <strong>但是此方式还是有缺点的，比如说Promise,是引入的实现垫片包会污染到全局的使用，如果不想使垫片污染到全局，请使用如下配置</strong>
+
+```json
+{
+    "presets": [
+        [
+            "@babel/preset-env"
+        ]
+    ],
+    "plugins": [
+      [
+        "@babel/plugin-transform-runtime",
+        {
+          "corejs": 3
+        }
+      ]
+    ]
+}
+
+```
+请执行 npm run build
+
+> 为什么要这么细致去配置呢，直接使用 @babel/preset-env 配置响应配置就好了，它们之间的区别又是什么？
+
+| .babelrc 配置 | webpack打包后的产物大小 |
+| ---- | ---- |
+| 不使用 @babel/plugin-transform-runtime | 36KB |
+| 使用@babel/plugin-transform-runtime，并配置参数 corejs: 3。不会污染全局环境 | 37KB |
+| 使用@babel/plugin-transform-runtime，不配置 corejs | 22KB |
